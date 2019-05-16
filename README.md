@@ -1,50 +1,30 @@
 # gladys-esp8266-Witty  (lien vers [Gladys](https://gladysassistant.com/))
 ## Gestion des volets roulants
-Module ESP8266 Witty + card 8 relays + sensor current (option)
-
-Exemple de câblage:
-<p><a target="_blank" href="https://github.com/zzuutt/gladys-esp8266-Witty/blob/master/images/schema.jpg"><img src="https://github.com/zzuutt/gladys-esp8266-Witty/blob/master/images/schema.jpg" width="350"></a> &nbsp; &nbsp; <img src="https://github.com/zzuutt/gladys-esp8266-Witty/blob/master/images/step9.jpg" height="278"></p>
+Module ESP8266 Witty + card 8 relays + card current sensor (option)
 
 # Module ESP8266 Witty
-Nous allons utiliser un module ESP8266 Witty pour gérer 8 relais et 8 entrées
+Nous allons utiliser un module ESP8266 Witty pour gérer 2 relais
 
-![ESP8266WITTY](https://github.com/zzuutt/gladys-esp8266-Witty/blob/master/images/ESP8266-Witty.jpg) + ![MCP23017](https://github.com/zzuutt/gladys-esp8266-Witty/blob/master/images/mcp23017.jpg) + ![8relay](https://github.com/zzuutt/gladys-esp8266-Witty/blob/master/images/8relay.jpg)![8input](https://github.com/zzuutt/gladys-esp8266-Witty/blob/master/images/8input.jpg)
+![ESP8266WITTY](https://github.com/zzuutt/gladys-esp8266-Witty/blob/master/images/ESP8266-Witty.jpg) + ![2relay](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/2relais.jpg)![CurrentSensor](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/CurrentSensor.jpg)
 
 Matériel nécessaire :
 - module ESP8266 [lien ebay](https://www.ebay.fr/itm/ESP8266-Serial-WIFI-Witty-Cloud-Development-Board-ESP-12F-Module-MINI-Nodemcu/264039039222?_trkparms=aid=111001&algo=REC.SEED&ao=1&asc=20160908105057&meid=7912a8f239d74abcb7126c140473364d&pid=100675&rk=6&rkt=15&sd=173503702813&itm=264039039222&_trksid=p2481888.c100675.m4236&_trkparms=pageci:8df836f6-4f16-11e9-aa46-74dbd1802d22%7Cparentrq:b59144011690ad794a1eef74fff9554d%7Ciid:1)
-- une carte extension mcp23017
-- une carte 8 relais avec optocoupleur [lien ebay](https://www.ebay.fr/itm/1-2-4-8-16-12V-Channel-Relay-Module-With-optocoupler-For-PIC-AVR-DSP-ARM-Arduino/173604730014?var=472283979123&_trkparms=aid=222007&algo=SIM.MBE&ao=2&asc=20170831090034&meid=e1b7924e5ee348e0948b592fde06df41&pid=100005&rk=1&rkt=9&sd=391975892322&itm=472283979123&_trksid=p2047675.c100005.m1851) 
-- une carte Optocoupler Isolation Voltage [lien ebay](https://www.ebay.fr/itm/Optocoupler-Isolation-Voltage-Test-Board-8-Channel-AC-220V-MCU-TTL-for-PLC/263162567047?_trkparms=aid=111001&algo=REC.SEED&ao=1&asc=20160908105057&meid=7912a8f239d74abcb7126c140473364d&pid=100675&rk=4&rkt=15&sd=173503702813&itm=263162567047&_trksid=p2481888.c100675.m4236&_trkparms=pageci:8df836f6-4f16-11e9-aa46-74dbd1802d22%7Cparentrq:b59144011690ad794a1eef74fff9554d%7Ciid:1)
+- une carte 2 relais avec optocoupleur [lien ebay](https://www.ebay.fr/itm/1-2-4-6-8-Channel-5V-Relay-Module-Board-Optocoupler-LED-for-Arduino-PiC-ARM-AVR/263072650467?ssPageName=STRK%3AMEBIDX%3AIT&var=562073380398&_trksid=p2057872.m2749.l2649) 
+- une carte Current sensor (option) [lien ebay](https://www.ebay.fr/itm/Design-5A-Range-Current-Sensor-Module-ACS712-Module-Arduino-Module/173334859689?ssPageName=STRK%3AMEBIDX%3AIT&_trksid=p2060353.m1438.l2649)
 
-Avec tout ça, nous allons contrôler des lampes raccordées à des télérupteurs. 
-
-Le câblage existant est conservé. 
-
-La carte relais sera relié aux télérupteurs.
-
-La carte "Optocoupler isolation 8 entrées" sera reliée aux lampes pour visualiser leurs états.
+Avec tout ça, nous allons contrôler un volet commandé par un inter (3 commandes). 
 
 # Description
 
 Téléversez le fichier ino ou le bin dans l'ESP
 
-A partir de la version 3.00, nous allons utiliser une zone réservée appelée SPIFFS.
+Nous allons utiliser une zone réservée appelée SPIFFS.
 
 Afin de pouvoir télécharger des fichiers dans cette zone mémoire, il est nécessaire d’installer l’outil de téléchargement des fichiers dans la zone SPIFFS à l’IDE Arduino disponible sur [Github](https://github.com/esp8266/arduino-esp8266fs-plugin).
 
-## Raccordement mcp23017
+## Raccordement
 
-Le port A du mcp23017 est utilisé pour commander les relais
-
-Le port B est utilisé pour contrôler l'état des lampes
-
-Je vous recommande de raccorder l'I2C comme ci-dessous, mais pas d’inquiétude vous pourrez rechercher comment est raccordé votre mcp23017 (voir Menu Système -> Scan I2C) 
-
-| pin |      mcp23017      |     ESP8266
-|-----|--------------------|--------------------
-|I2C SDA | I2C SDA | pin GPIO5
-|I2C SCL | I2C SCL | pin GPIO0
-|Interrupt | INT B | pin GPIO14
+Schéma
 
 ## Visualisation 
 Le module ESP est équipé d'une led 3 couleurs, nous allons l'utiliser pour visualiser chaque étape.
@@ -52,7 +32,10 @@ Le module ESP est équipé d'une led 3 couleurs, nous allons l'utiliser pour vis
 > Le module doit être configuré (la partie wifi)
 
 > **led magenta clignotante :**
-> Le module est en configuration usine - Vous devez aller sur la page système pour saisir vos paramètres 
+> Le volet descend
+
+> **led jaune clignotante :**
+> Le volet monte
 
 > **led verte clignotante :**
 > Indique la lecture du fichier de configuration
@@ -76,6 +59,9 @@ Le bouton de l'ESP va nous permettre d'effectuer différentes actions
 > **un appui court :**
 > active le mode debug
 
+> **deux appuis courts :**
+> désactive la led
+
 > **deux appuis courts après avoir activé le mode debug :**
 > imprime sur le port série la configuration
 
@@ -83,15 +69,6 @@ Le bouton de l'ESP va nous permettre d'effectuer différentes actions
 > réinitialisation des paramètres wifi, active le mode configuration. Utile lors d'un changement de paramètre.
 
 ## Première étape
-Configurez Gladys
-* installez le module (si ce n'est pas déjà fait) de **Mathieu**, [Gladys-Device-HTTP](https://github.com/MathieuAndrade/Gladys-Device-HTTP)
-* Ajoutez un nouveau device, comme indiqué, dans le champ identifier renseignez l'adresse complète de votre device (http://ip_de_lesp)
-* Cliquez sur "Edit" et créé un devicetype. Dans le champ identifier du deviceType entrez les paramètres suivants */?token=**votre_token**&deviceid=**ID_du_devicetype**&cmd=**COMMAND***
-
-Les **COMMAND**es peuvent être (***en majuscule***) :
-
-* PUSH   *(pour les télérupteurs) la durée de l'appui est modifiable voir les paramètres*
-* SWITCH
 
 ## Initialisation
 A l'allumage le module clignote en bleue, vous devez configurer le wifi.
@@ -120,9 +97,9 @@ La led bleue clignotante passe au fixe, puis le module redémarre.
 
 S'il ne redémarre pas tout seul, débranchez l'alimentation puis rebranchez.
 
-La led verte clignote puis passe au blanc clignotant ou magenta clignotant. 
+La led verte clignote puis passe au blanc clignotant ou bleu clignotant rapide. 
 
-- magenta clignotant : vous êtes en configuration d'usine. Allez sur la page 'système' du module
+- bleu clignotant rapide: vous êtes en configuration d'usine. Allez sur la page 'système' du module
 
 http://ip-de-lesp/sys
 
@@ -131,7 +108,7 @@ http://ip-de-lesp/sys
 ![step9](https://github.com/zzuutt/gladys-esp8266-Witty/blob/master/images/step7-1.jpg)
 ![step10](https://github.com/zzuutt/gladys-esp8266-Witty/blob/master/images/step8-1.jpg)
 
-- blanc clignotant : le module envoie l'état des lampes à Gladys.
+- blanc clignotant : le module envoie l'état du volet à Gladys.
 
 ## Gestion
 
@@ -139,5 +116,3 @@ Vous pouvez gérer vos périphériques directement depuis votre smartphone.
 
 Allez sur la page système puis sélectionnez le menu gestion
 
-![step7](https://github.com/zzuutt/gladys-esp8266-Witty/blob/master/images/step5-1.jpg)
-![gestion](https://github.com/zzuutt/gladys-esp8266-Witty/blob/master/images/step9.jpg)
