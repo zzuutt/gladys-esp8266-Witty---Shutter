@@ -8,7 +8,7 @@
    + Design 5A Range Current Sensor Module ACS712 Module Arduino Module
    + Optocoupler Isolation Voltage Test Board 8 Channel AC 220V
 
-   V 0.1.0
+   V 0.2.0
 
 */
 #include <FS.h>
@@ -103,8 +103,8 @@ const int INTER_UP_PIN = 16;
 const int LIGHT_PIN = A0;
 
 bool ledStatus = false;
-bool sensorCurrent = true;
-bool sensorLight = false;
+bool sensorCurrent = false;
+bool sensorLight = true;
 bool displayLight = true;
 bool sensor = false;
 int lightCurrentValue = 0;
@@ -632,6 +632,9 @@ void halt() {
   motorStatus = 0;
   digitalWrite(REL_UP_PIN, 1); 
   digitalWrite(REL_DOWN_PIN, 1);
+  if(gladys_server != "" && strcmp(gladys_server,"0.0.0.0") != 0) {
+    sendStateToGladys(shutters.getCurrentLevel()); 
+  }
 }
 
 void displayData(){
@@ -1174,6 +1177,38 @@ void sendState() {
   server.send(200, "text/json", config_json);
 }
 
+void sendStateToGladys (bool realState){
+  HTTPClient http;
+  String getData, link, payload;
+  
+  if(sensor && !debugMode){
+    blinkLED(1, 1, 1, 0.2);
+  } else {
+    black();
+  }
+  
+  getData = "?token=" + String(gladys_token) + "&devicetype=" + String(volet.id) + "&value=" + String(realState);
+  link = "http://" + String(gladys_server) + ":" + String(gladys_port) + "/devicestate/create" + getData;
+  http.begin(link);
+  int httpCode = http.GET();
+  if(httpCode >0) {
+    payload = http.getString();
+  }
+  if(debugMode){
+    Serial.println("Link: " + link);
+    Serial.println("http code: " + httpCode);
+    Serial.println("response: " + payload + "\n");
+  }
+
+  http.end();
+  
+  if(!debugMode){
+    blinkLED(0,0,0,0.5);
+  } else {
+    blinkLED(0,1,0,0.1);
+  }
+}
+
 void setup() {
   pinMode(BLUE_PIN_LED, OUTPUT);
   pinMode(RED_PIN_LED, OUTPUT);
@@ -1232,7 +1267,7 @@ void setup() {
       
       blinkLED(0, 1, 0, 0.5); // Turn LED off as we are not in configuration mode.
       WiFi.mode(WIFI_STA); // Force to station mode because if device was switched off while in access point mode it will start up next time in access point mode.
-      WiFi.begin(SSID, password);
+      //WiFi.begin(SSID, password);
       unsigned long startedAt = millis();
       Serial.print("After waiting ");
       int connRes = WiFi.waitForConnectResult();
