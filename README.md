@@ -75,7 +75,7 @@ Le bouton de l'ESP va nous permettre d'effectuer différentes actions
 > **un appui long (8sec) :**
 > réinitialisation des paramètres wifi, active le mode configuration. Utile lors d'un changement de paramètre.
 
-## Première étape
+# Première étape
 
 ## Initialisation
 A l'allumage le module clignote en bleue, vous devez configurer le wifi.
@@ -115,16 +115,29 @@ http://ip-de-lesp/sys
 ![conf3](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/conf3.jpg)
 ![conf4](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/conf4.jpg)
 
+Vous pouvez :
+- régler la position du volet roulant après une coupure électrique
+- mettre un nom à votre volet roulant
+- définir la pièce ou il est situé
+- ....
+
+> Après une coupure électrique, les commandes mécaniques ne sont pas prises en compte. Le volet est positionné à la valeur défini dans la configuration **[ position fermé / position ouvert / dernière position connue]**
+
 - blanc clignotant : le module envoie l'état du volet à Gladys.
 
 ## Réglage des temps de courses (Monté et Descente)
+
+### Réglage Manuel
+
 - vous n'avez pas le module optionnel. Faites le réglage **manuelllement**
 
 > Sur la page 'système', sélectionnez le menu 'Courses (Manuel)' et suivre les instructions
 
 ![conf3](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/conf3.jpg)
 
-- vous avez raccordé le module optionnel. Faites le réglage en automatique
+### Réglage Automatique
+
+- vous avez raccordé le module optionnel. Faites le réglage en **automatique**
 
 > Sur la page 'système', sélectionnez le menu 'Courses (Auto)' et suivre les instructions
 
@@ -132,7 +145,14 @@ http://ip-de-lesp/sys
 
 ## Gestion
 
-Vous pouvez gérer vos périphériques directement depuis votre smartphone.
+Vous pouvez gérer votre volet roulant à l'aide : 
+- des commandes mécaniques
+- depuis votre smartphone.
 
-Allez sur la page 'système' puis sélectionnez le menu gestion
+le tout en même temps
+
+Allez sur la page 'système' puis sélectionnez le menu 'Gestion'
+
+![conf1](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/conf1.jpg)
+![gestion](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/gestion.jpg)
 
