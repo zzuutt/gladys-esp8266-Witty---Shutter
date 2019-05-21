@@ -91,14 +91,14 @@ C'est très simple, prenez votre smartphone,
 * Notez l'adresse IP du module, cela peut servir sauf si vous utilisez une IP fixe
 * Fermez la page "*Exit portal*"
 
-![step1](https://github.com/zzuutt/gladys-esp8266-Witty/blob/master/images/step1.jpg)
-![step2](https://github.com/zzuutt/gladys-esp8266-Witty/blob/master/images/step2.jpg)
+![step1](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/step1.jpg)
+![step2](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/step2.jpg)
 
-![step3](https://github.com/zzuutt/gladys-esp8266-Witty/blob/master/images/step3.jpg)
-![step4](https://github.com/zzuutt/gladys-esp8266-Witty/blob/master/images/step4-2.jpg)
-![step4](https://github.com/zzuutt/gladys-esp8266-Witty/blob/master/images/step4-3.jpg)
-![step5](https://github.com/zzuutt/gladys-esp8266-Witty/blob/master/images/step6.jpg)
-![step6](https://github.com/zzuutt/gladys-esp8266-Witty/blob/master/images/step8-0.jpg)
+![step3](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/step3.jpg)
+![step4](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/step4-2.jpg)
+![step4](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/step4-3.jpg)
+![step5](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/step6.jpg)
+![step6](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/step8-0.jpg)
 
 La led bleue clignotante passe au fixe, puis le module redémarre.
 
@@ -110,16 +110,29 @@ La led verte clignote puis passe au blanc clignotant ou bleu clignotant rapide.
 
 http://ip-de-lesp/sys
 
-![step7](https://github.com/zzuutt/gladys-esp8266-Witty/blob/master/images/step5-1.jpg)
-![step8](https://github.com/zzuutt/gladys-esp8266-Witty/blob/master/images/step6-2.jpg)
-![step9](https://github.com/zzuutt/gladys-esp8266-Witty/blob/master/images/step7-1.jpg)
-![step10](https://github.com/zzuutt/gladys-esp8266-Witty/blob/master/images/step8-1.jpg)
+![conf1](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/conf1.jpg)
+![conf2](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/conf2.jpg)
+![conf3](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/conf3.jpg)
+![conf4](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/conf4.jpg)
 
 - blanc clignotant : le module envoie l'état du volet à Gladys.
+
+## Réglage des temps de courses (Monté et Descente)
+- vous n'avez pas le module optionnel. Faites le réglage **manuelllement**
+
+> Sur la page 'système', sélectionnez le menu 'Courses (Manuel)' et suivre les instructions
+
+![conf3](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/conf3.jpg)
+
+- vous avez raccordé le module optionnel. Faites le réglage en automatique
+
+> Sur la page 'système', sélectionnez le menu 'Courses (Auto)' et suivre les instructions
+
+![conf4](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/conf4.jpg)
 
 ## Gestion
 
 Vous pouvez gérer vos périphériques directement depuis votre smartphone.
 
-Allez sur la page système puis sélectionnez le menu gestion
+Allez sur la page 'système' puis sélectionnez le menu gestion
 
