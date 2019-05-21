@@ -5,14 +5,17 @@ Module ESP8266 Witty + card 8 relays + card current sensor (option)
 # Module ESP8266 Witty
 Nous allons utiliser un module ESP8266 Witty pour gérer 2 relais
 
-![ESP8266WITTY](https://github.com/zzuutt/gladys-esp8266-Witty/blob/master/images/ESP8266-Witty.jpg) + ![2relay](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/2relais.jpg)![CurrentSensor](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/CurrentSensor.jpg)
+![ESP8266WITTY](https://github.com/zzuutt/gladys-esp8266-Witty/blob/master/images/ESP8266-Witty.jpg) + ![2relay](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/2relais.jpg) + ![CurrentSensor](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/CurrentSensor.jpg)
 
 Matériel nécessaire :
 - module ESP8266 [lien ebay](https://www.ebay.fr/itm/ESP8266-Serial-WIFI-Witty-Cloud-Development-Board-ESP-12F-Module-MINI-Nodemcu/264039039222?_trkparms=aid=111001&algo=REC.SEED&ao=1&asc=20160908105057&meid=7912a8f239d74abcb7126c140473364d&pid=100675&rk=6&rkt=15&sd=173503702813&itm=264039039222&_trksid=p2481888.c100675.m4236&_trkparms=pageci:8df836f6-4f16-11e9-aa46-74dbd1802d22%7Cparentrq:b59144011690ad794a1eef74fff9554d%7Ciid:1)
 - une carte 2 relais avec optocoupleur [lien ebay](https://www.ebay.fr/itm/1-2-4-6-8-Channel-5V-Relay-Module-Board-Optocoupler-LED-for-Arduino-PiC-ARM-AVR/263072650467?ssPageName=STRK%3AMEBIDX%3AIT&var=562073380398&_trksid=p2057872.m2749.l2649) 
 - une carte Current sensor (option) [lien ebay](https://www.ebay.fr/itm/Design-5A-Range-Current-Sensor-Module-ACS712-Module-Arduino-Module/173334859689?ssPageName=STRK%3AMEBIDX%3AIT&_trksid=p2060353.m1438.l2649)
 
-Avec tout ça, nous allons contrôler un volet commandé par un inter (3 commandes). 
+Avec tout ça, nous allons contrôler un volet commandé par un inter (3 commandes - Monte / Stop / Descent) via :
+
+- Gladys (avec un script - pour le moment)
+- par l'interface web du module. 
 
 # Description
 
@@ -28,8 +31,11 @@ Schéma
 
 ## Visualisation 
 Le module ESP est équipé d'une led 3 couleurs, nous allons l'utiliser pour visualiser chaque étape.
-> **led clignotante bleue :**
+> **led bleue clignotante (lent) :**
 > Le module doit être configuré (la partie wifi)
+
+> **led bleue clignotante (rapide) :**
+> Le module est en configuration d'usine. Connectez vous sur l'interface de gestion pour entrer les paramètres.
 
 > **led magenta clignotante :**
 > Le volet descend
@@ -41,10 +47,10 @@ Le module ESP est équipé d'une led 3 couleurs, nous allons l'utiliser pour vis
 > Indique la lecture du fichier de configuration
 
 >**led verte clignotante (rapide) :**
->mode 'debug' activé
+> mode 'debug' activé
 
 >**led fixe blanche :**
->le module est démarré, il attend les commandes et évènements
+> le module est démarré, il attend les commandes et évènements
 
 > **led blanche clignotante :**
 > le module envoie des données à Gladys
@@ -52,7 +58,8 @@ Le module ESP est équipé d'une led 3 couleurs, nous allons l'utiliser pour vis
 > **led rouge clignotante :**
 > indique une erreur
 
-Si vous avez coché l'option '***Light setting***', dès que le module se trouvera dans l'obscurité, la led sera coupée
+Si vous n'utilisez pas le module optionnel (ACS712), dès que le module se trouvera dans l'obscurité, la led sera coupée.
+Avec le module, vous pouvez configurer l'état de la led par défaut (voir page de config) et +
  
 ## Actions
 Le bouton de l'ESP va nous permettre d'effectuer différentes actions
@@ -60,7 +67,7 @@ Le bouton de l'ESP va nous permettre d'effectuer différentes actions
 > active le mode debug
 
 > **deux appuis courts :**
-> désactive la led
+> désactive / active la led
 
 > **deux appuis courts après avoir activé le mode debug :**
 > imprime sur le port série la configuration
