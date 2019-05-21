@@ -160,7 +160,7 @@ commande à utiliser:
 
 > POSITION : indiquer un pourcentage ( 0 = ouvert / 100 = fermé ) utilisé avec la commande 'goto'
 
-#### depuis un smartphone
+#### Depuis un smartphone
 
 Allez sur la page 'système' puis sélectionnez le menu 'Gestion'
 
