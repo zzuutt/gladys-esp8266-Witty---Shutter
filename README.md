@@ -166,4 +166,5 @@ Allez sur la page 'système' puis sélectionnez le menu 'Gestion'
 
 ![conf1](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/conf1.jpg)
 ![gestion](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/gestion.jpg)
+![gestion1](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/gestion1.jpg)
 
