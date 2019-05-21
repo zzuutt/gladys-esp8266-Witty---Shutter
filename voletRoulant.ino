@@ -56,8 +56,6 @@ String groupName[] = {"Aucun", "Salon", "Salle à manger", "Cuisine", "Chambre 1
 int nbrGroup = sizeof(groupName) / sizeof(groupName[0]); //array size  ;
 
 // WiFi Router Login - change these to your router settings
-const char* SSID = "President-GPE";
-const char* password = "12345678901234567890abcdef";
 char gladys_server[40];
 char gladys_port[6] = "8080";
 char gladys_token[34] = "YOUR_GLADYS_TOKEN";
