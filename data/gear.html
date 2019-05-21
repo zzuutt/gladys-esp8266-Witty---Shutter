@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="js/jquery.min.js"></script>
+  <!--bootstrap/3.4.1')-->
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery-ui.js"></script>
+  <script src="js/jquery-ui-touch.js"></script>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/jquery-ui.css">
+  <title></title>
+  <style>
+  body {
+    font-family: Arial;
+    color: grey;
+    width: 100%;
+    height: 100%;
+  }
+
+  .loader{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,0.7);
+    z-index: 9999;     
+  }
+  .spin-loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    background-color:white;
+  }
+  .text-loader {
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    width: 150px;
+    height: 1em;
+    margin: -1em -75px;
+    display: block;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 1em;
+  }
+  
+  .state-ok {
+    border-top: 16px solid #34FF0E;
+  }
+  .state-false {
+    border-top: 16px solid #FF552E;
+  }
+      
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .striped {
+    background-color: #f6f6f6;
+  }
+  .volet {
+    border: 1px solid #ccc;
+    height: 298px;
+    overflow:hidden;
+    position:relative;
+  }
+  .guide {
+  	border: 1px solid #ccc;
+  	height: 100%;
+  	width: 2%;  	
+  }
+  .right {float: right;}
+  .left {float: left;}
+  .lame {
+    position: absolute;
+  	width: 96%;
+  	border: 1px solid #ccc;
+  	height: 100%;
+  	float: left;
+    background-color: #d4d4d4;
+    background: -webkit-linear-gradient(-90deg, rgba(255,255,255,0) 50%, rgba(255,255,255,0.47) 50%, rgb(255,255,255) 100%), -webkit-linear-gradient(90deg, rgba(0,0,0,0) 50%, rgb(255,255,255) 50%, rgba(255,255,255,0.5) 100%), rgb(212, 212, 212);
+    background: -moz-linear-gradient(180deg, rgba(255,255,255,0) 50%, rgba(255,255,255,0.47) 50%, rgb(255,255,255) 100%), -moz-linear-gradient(0deg, rgba(0,0,0,0) 50%, rgb(255,255,255) 50%, rgba(255,255,255,0.5) 100%), rgb(212, 212, 212);
+    background: linear-gradient(180deg, rgba(255,255,255,0) 50%, rgba(255,255,255,0.47) 50%, rgb(255,255,255) 100%), linear-gradient(0deg, rgba(0,0,0,0) 50%, rgb(255,255,255) 50%, rgba(255,255,255,0.5) 100%), rgb(212, 212, 212);
+  ;    
+    -webkit-background-size: 50px 50px;
+    -moz-background-size: 50px 50px;
+    background-size: 50px 50px;
+    left:2%;
+    top:0;
+  }  
+  .stateUp, .stateDown {
+  	position: absolute;
+  	top: 0;
+  	width: 100%;
+  	height: 50%;
+  	left: 0;
+  	float: left;
+  	display: block;
+  	padding-top: 35%;
+  	font-size: 2em;
+  	color: rgba(0, 0, 0, 0.14);
+  }
+  .stateDown {
+    top:50%;
+  }
+  .blink {
+     animation-duration: 400ms;
+     animation-name: blink-color;
+     animation-iteration-count: infinite;
+     animation-direction: alternate;
+     -webkit-animation:blink-color 400ms infinite;
+  }
+  @keyframes blink-color {
+     from {
+        opacity: 1;
+     }
+     to {
+        opacity: 0;
+     }
+   }
+   .actif {
+    color:#F6931F;
+   }
+  </style>
+
+  </head>
+  <body>
+    <div class="text-center">
+      <h3 id="groupe-name">Group / Name</h3>
+      <p id="version">v 0.0.0</p> 
+    </div>
+    <table style="width:100%;">
+      <tr>
+        <td colspan="3">
+          <a role="button" class="btn btn-default btn-lg btn-block" data-command="open">
+            <span class="glyphicon glyphicon-arrow-up pull-left"></span>Ouvrir
+            <span class="glyphicon glyphicon-arrow-up pull-right"></span>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td style="width:20%;">
+          <a role="button" class="btn btn-default btn-lg btn-block" data-command="stop">
+            <span class="glyphicon glyphicon-stop"></span>&nbsp;
+            <span class="hidden-xs">Stop</span>
+          </a>
+        </td>
+        <td style="width:60%;">
+          <div class="volet">
+            <div class="guide left">&nbsp;</div>
+            <div class="lame">&nbsp;</div>
+            <div class="guide right">&nbsp;</div> 
+            <div class="stateUp text-center"><span class="glyphicon glyphicon-triangle-top"></div>
+            <div class="stateDown text-center"><span class="glyphicon glyphicon-triangle-bottom"></div>
+          </div>
+        </td>
+        <td style="width:20%;height:300px;padding-left:8%;padding-top:20px;">
+          <div id="slider-vertical" style="height:220px;"></div>
+          <input type="text" size="3" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;margin-left:-8px;margin-top:8px;">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <a role="button" class="btn btn-default btn-lg btn-block" data-command="close">
+            <span class="glyphicon glyphicon-arrow-down pull-left"></span>Fermer
+            <span class="glyphicon glyphicon-arrow-down pull-right"></span>
+          </a>
+        </td>
+      </tr>
+    </table>
+    <div style="height:20px;">&nbsp;</div>
+    <div class="loader"><div class="spin-loader"></div><div class="text-loader"></div></div>
+
+  <script>
+  var position;
+  var motor;
+  var t;
+  var voletId;
+  var commandGoto = 0;
+  var voletIp;
+  
+  $( function() {
+   $( "#slider-vertical" ).slider({
+      orientation: "vertical",
+      range: "min",
+      min: 0,
+      max: 100,
+      value: position,
+      slide: function( event, ui ) {
+        position =  100 - ui.value;
+        $( "#amount" ).val(position + '%');
+        $('.lame').css({'transform' : 'translate(0, -' + ui.value + '%)'});
+        commandGoto = 2;
+      },
+      start: function( event, ui ) {
+        commandGoto = 2;
+      },
+      stop: function( event, ui ) {
+        var val = 100 - ui.value;
+        var data = "token=" + t + "&deviceid=" + voletId + "&cmd=goto&position=" + val;
+        $(".btn").removeClass("actif");
+        commandGoto = 1;
+        // send ajax
+        $.getJSON("/",
+           data
+        ).done(function(data) {
+               co.addClass("actif");
+               console.log( data );
+               
+           }
+        ).fail(function(data) {
+              //$(".loader").show(); 
+              //$(".spin-loader").addClass("state-false");
+              //$(".text-loader").html("<span style='color:red;'>Erreur<br>"+data.responseJSON.error+"</span>");
+           }
+        );
+        return false; 
+      }
+    });
+    position = $("#slider-vertical").slider("value");
+    $( "#amount" ).val(100 - position + '%');
+    $('.lame').css({'transform' : 'translate(0, -' + position + '%)'});
+    
+    init();  	
+  } 
+  );
+
+  $(document).on('click', '.btn', function(){
+      var co = $(this);
+      var cmd = co.data('command');
+      var data = "token=" + t + "&deviceid=" + voletId + "&cmd=" + cmd;
+      $(".btn").removeClass("actif");
+      // send ajax
+      $.getJSON("/",
+         data
+      ).done(function(data) {
+             co.addClass("actif");
+             console.log( data );
+         }
+      ).fail(function(data) {
+          co.addClass("actif");
+            //$(".loader").show(); 
+            //$(".spin-loader").addClass("state-false");
+            //$(".text-loader").html("<span style='color:red;'>Erreur<br>"+data.responseJSON.error+"</span>");
+         }
+      );
+      return false; 
+    });
+  
+  function init(){
+    $(".text-loader").text("Initialisation");
+    $(".loader").show();     
+    $.get( "/sendconfig?mode=direct", function(result) {
+      console.log(result);
+    }, "json" )
+    .done(function(data){
+      if(data.voletGroup && data.voletName) {$("#groupe-name").text(data.voletGroup + ' / ' + data.voletName);}
+      if(data.version) {$("#version").text('v ' + data.version);}
+
+      if(data.t) {t = data.t;}
+      if(data.voletIp) { voletIp = data.voletIp; }
+      if(data.voletId) { voletId = data.voletId; }
+      getState();
+      $(".loader").hide();
+      setInterval(function() {
+        getState();
+      }, 2000);
+    })
+    .fail(function(data){
+      console.log(data);
+      $(".spin-loader").addClass("state-false");
+      $(".text-loader").html("<span style='color:red;'>Erreur<br>"+data.responseJSON.error+"</span>");
+    });
+      
+  }
+  function getState() {
+    if(commandGoto < 2) {
+      $.get( "/sendstate", function(result) {
+        console.log(result);
+      }, "json" )
+      .done(function(data){
+        console.log(data);
+        motor = 0;
+        if(data.motor) {motor = data.motor;}
+        if(data.position) {position = data.position;}
+        if(motor == 0){
+          $(".stateUp").removeClass("blink");
+          $(".stateDown").removeClass("blink");
+          $("#slider-vertical").slider( "enable" );
+          commandGoto = 0;
+          $( "#amount" ).removeClass("blink");
+        }
+        if(motor == 1){
+          $(".stateUp").addClass("blink");
+          $("#slider-vertical").slider( "disable" )
+        }
+        if(motor == 2){
+          $(".stateDown").addClass("blink");
+          $("#slider-vertical").slider( "disable" )
+        }
+        if(commandGoto == 1){
+          $( "#amount" ).addClass("blink");
+        }
+        positionVolet(position);
+      })
+      .fail(function(data){
+        console.log(data);
+      }); 
+    } 
+  }
+  
+  function positionVolet(position) {
+    if(commandGoto == 0) {
+      $( "#slider-vertical" ).slider("value", 100 - position);
+      $( "#amount" ).val(position + '%');
+    }
+    var lame = 100 - position;
+    $('.lame').css({'transform' : 'translate(0, -' + lame + '%)'});  
+  }
+  </script>
+  </body>
+</html>

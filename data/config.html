@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--jquery/3.1.1')-->
+    <script src="js/jquery.min.js"></script>
+    <!--bootstrap/3.4.1')-->
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Configuration</title>
+    <style>
+    .loader{
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255,255,255,0.7);
+      z-index: 9999;     
+    }
+    .spin-loader {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 150px;
+      height: 150px;
+      margin: -75px 0 0 -75px;
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #3498db;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+      background-color:white;
+    }
+    .text-loader {
+      left: 50%;
+      top: 50%;
+      position: absolute;
+      width: 150px;
+      height: 1em;
+      margin: -1em -75px;
+      display: block;
+      vertical-align: middle;
+      text-align: center;
+      line-height: 1em;
+    }
+    .button-loader {
+      position: absolute;
+      display: none;
+      left: 50%;
+      top: 50%;
+      width: 150px;
+      height: 150px;
+      margin: 80px -75px;
+      text-align: center;
+      font-size: 2em;
+      color: #4DB939;
+    }
+    .state-ok {
+      border-top: 16px solid #34FF0E;
+    }
+    .state-false {
+      border-top: 16px solid #FF552E;
+    }
+        
+    /* Safari */
+    @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .striped {
+      background-color: #f6f6f6;
+    }
+    </style>
+  </head>
+  <body> 
+    <div class="container">
+      <ol class="breadcrumb">
+        <li><a href="/sys"><span class="glyphicon glyphicon-home"></span></a></li>
+        <li class="active">Configuration</li>
+      </ol>
+      <div class="text-center">
+        <h1><span class="glyphicon glyphicon-cog"></span> Configuration</h1>
+        <p id="version">v 0.0.0</p> 
+      </div>
+      <form onsubmit='return onSubmit(this)' method="post" enctype="multipart/form-data" action="saveconfig">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <!--- Divers --->
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading0">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse0" aria-expanded="true" aria-controls="collapse0">
+                  <span class="glyphicon glyphicon-pencil"></span> Divers
+                </a>
+              </h4>
+            </div>
+            <div id="collapse0" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading0">
+              <div class="panel-body">
+                <fieldset class="legend-brdr-bttm">
+                <legend>Commandes</legend>
+                <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                  <label for="sensor">Sensor</label>
+                  <div class="radio col-xs-12">
+                    <label>
+                      <input type="radio" name="sensor" value="1">
+                      J'utilise le capteur de luminosité (LDR)
+                    </label>
+                  </div>
+                  <div class="radio col-xs-12">
+                    <label>
+                      <input type="radio" name="sensor" value="2">
+                      J'utilise un capteur de courant<br />Module ACS712 (Option)
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                  <label for="displayLight">Led (avec le module ACS712)</label>
+                  <div class="checkbox col-xs-12">
+                    <input type="checkbox" name="displayLight" id="displayLight" value="1">
+                    Activer la LED
+                  </div>
+                  <p class="help-block">Cela correspond a l'état par défaut.</p>
+                  <p class="alert alert-warning">Vous pourrez activer / désactiver la led, temporairement jusqu'au prochain redémarrage, directement sur le module.<br />- Sortez du mode 'debug'<br />- Appuyez 2 fois sur le boutton.</p>
+                  <p class="alert alert-info">Si vous utilisez le capteur de luminosité (LDR), la led sera automatiquement éteinte dans l'obscurité. Ce paramètre n'est pas pris en compte.</p>
+                </div>
+                <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                  <label for="onRestartGoToPosition">Position du volet</label>
+                  <select class="form-control" id="onRestartGoToPosition" name="onRestartGoToPosition">
+                    <option value="0">Ouvert</option>
+                    <option value="1">Fermé</option>
+                    <option value="2">Dernière position connue</option>
+                  </select>
+                  <p class="help-block">Après une coupure éléctrique le volet se met en position</p>
+                </div>
+                </fieldset>            
+              </div>
+            </div>
+          </div>
+          <!--- Serveur --->
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading1">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                  <span class="glyphicon glyphicon-pencil"></span> Serveur
+                </a>
+              </h4>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1">
+              <div class="panel-body">
+                <fieldset class="legend-brdr-bttm">
+                <legend>Gladys</legend>
+                <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                  <label for="gladys_server">Adresse IP</label>
+                  <input type="text" class="form-control" name="gladys_server" id="gladys_server" placeholder="192.168.0.50" maxlength="16" value="">
+                  <p class="help-block">Indiquez l'adresse IP</p>
+                </div>
+                <div class="form-group col-xs-12 col-sm-6 col-md-2 col-lg-2">
+                  <label for="gladys_port">Port</label>
+                  <input type="text" class="form-control" name="gladys_port" id="gladys_port" placeholder="80" maxlength="6" value="">
+                  <p class="help-block">Indiquez le numéro de port</p>
+                </div>
+                <div class="form-group col-xs-12 col-sm-6 col-md-5 col-lg-5">
+                  <label for="gladys_token">Token</label>
+                  <input type="text" class="form-control" name="gladys_token" id="gladys_token" placeholder="" maxlength="34" value="">
+                  <p class="help-block">Renseignez le token (pour la sécurité)</p>
+                </div> 
+                </fieldset>           
+              </div>
+            </div>
+          </div>
+          <!--- Definition des groupes --->
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading2">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="true" aria-controls="collapse2">
+                  <span class="glyphicon glyphicon-pencil"></span> Définition des groupes
+                </a>
+              </h4>
+            </div>
+            <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2">
+              <div class="panel-body" id="group">
+                <!---div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                  <label for="groupName1">Nom du groupe 1</label>
+                  <input type="text" class="form-control groupName" name="groupName1" id="groupName1" placeholder="32 Caractères max." maxlength="32">
+                </div--->               
+              </div>
+            </div>
+          </div>
+          <!--- Definition du peripherique --->
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading3">
+              <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                  <span class="glyphicon glyphicon-pencil"></span> Définition du périphérique
+                </a>
+              </h4>
+            </div>        
+            <div id="collapse3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading3">
+              <div class="panel-body">
+                <!--- Peripherique 1 --->
+                <fieldset class="legend-brdr-bttm">
+                <legend>Volet</legend>
+                <div class="form-group col-xs-12 col-sm-4 col-md-4">
+                  <label for="deviceName1">Nom</label>
+                  <input type="text" class="form-control" name="voletName" id="voletName" placeholder="32 Caractères max." maxlength="32">
+                </div>
+                <div class="form-group col-xs-6 col-sm-2 col-md-2 col-lg-1">
+                  <label for="deviceId1">ID</label>
+                  <input type="text" class="form-control" name="voletId" id="voletId" placeholder="123" maxlength="3">
+                </div>
+                <div class="form-group col-xs-12 col-sm-4 col-md-4">
+                  <label for="voletGroup">Rattaché au groupe</label>
+                  <select class="form-control groupNameSelect" id="voletGroup" name="voletGroup">
+                    <option value="0">Aucun</option>
+                  </select>
+                </div>
+                <!--div class="form-group col-xs-6 col-sm-2 col-md-2">
+                  <label for="deviceType1">Type</label>
+                  <select class="form-control" id="deviceType1" name="deviceType1">
+                    <option value="2">Switch</option>
+                    <option value="1">Push</option>
+                  </select>
+                </div-->
+                </fieldset>               
+              </div>
+            </div>
+          </div>
+        </div>
+          <input type="hidden" name="secretKey" id="secretKey">
+          <input type="hidden" name="nbrGroup" id="nbrGroup">
+          <button type="submit" class="btn btn-default pull-right">Sauvegarder</button>
+      </form>
+      
+    </div>
+    <div style="height:20px;">&nbsp;</div>
+    <div class="loader">
+      <div class="spin-loader"></div>
+      <div class="text-loader"></div>
+      <div class="button-loader">
+        <a href="/sys"><span class="glyphicon glyphicon-home"></span></a>
+      </div>
+    </div>
+    <script>
+    var nbrGroup = 0;
+    
+    $(document).ready(function() {
+      $('.panel-collapse.in').collapse('hide');
+      init();
+    });
+    
+    $(document).on('change', '.groupName', function(){
+      var id = $(this).attr('id');
+      var num =  parseInt(id.substr(id.length - 1),10);
+      var group_name = $(this).val();
+      if(num >0 && num <nbrGroup && group_name != ''){
+        $('select.groupNameSelect option[value="'+ num + '"]').text(group_name);
+      }  
+    });
+    
+    function init(){
+      $(".text-loader").text("Initialisation");
+      $(".loader").show();     
+      $.get( "/sendconfig", function(result) {
+        console.log(result);
+      }, "json" )
+      .done(function(data){
+        if(data.version) {$("#version").text('v ' + data.version);}
+        if(data.displayLight) {$("#displayLight").prop('checked', data.displayLight);}
+        //sensorLight & sensorCurrent
+        if(data.sensor) {$('input[name=sensor][value=' + data.sensor + ']').prop("checked", true);}
+        if(data.gladys_server) {$("#gladys_server").val(data.gladys_server);}
+        if(data.gladys_port) {$("#gladys_port").val(data.gladys_port);}
+        if(data.gladys_token) {$("#gladys_token").val(data.gladys_token);}
+        
+        $("#onRestartGoToPosition").val(data.onRestartGoToPosition);
+        
+        nbrGroup = data.nbrGroup;
+        if(nbrGroup > 0) {
+          $("#nbrGroup").val(data.nbrGroup);
+          var newOptions = {0 : 'Aucun'};
+          var selectedOption = data.voletGroup;
+          
+          for (var i = 1; i< nbrGroup; i++) {
+            var val = data["groupName" + i];
+            newOptions[i] = val;
+            $('#group').append('<div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3"><label for="groupName' + i + '">Nom du groupe '+ i +'</label><input type="text" class="form-control groupName" name="groupName' + i + '" id="groupName' + i + '" value="' + val + '" placeholder="32 Caractères max." maxlength="32"></div>');  
+          }
+          
+          var select = $('#voletGroup');
+          if(select.prop) {
+            var options = select.prop('options');
+          }
+          else {
+            var options = select.attr('options');
+          }
+          $('option', select).remove();
+          
+          $.each(newOptions, function(val, text) {
+              options[options.length] = new Option(text, val);
+          });
+          select.val(selectedOption);
+        }
+        
+        $("#voletId").val(data.voletId);
+        
+        if(data.voletName) {$("#voletName").val(data.voletName);}
+
+        if(data.voletGroup) {$("#voletGroup").val(data.voletGroup);}
+
+        if(data.secretKey) {$("#secretKey").val(data.secretKey);}
+
+        $(".loader").hide();
+      })
+      .fail(function(data){
+        console.log(data);
+        $(".spin-loader").addClass("state-false");
+        $(".text-loader").html("<span style='color:red;'>Erreur<br>"+data.responseJSON.error+"</span>");
+      });
+      
+    }    
+    
+    function onSubmit( form ){
+      $('.panel-collapse.in').collapse('hide');
+      $(".text-loader").text("Sauvegarde");
+      $(".loader").show();
+      var data = $(form).serializeFormJSON();
+      
+      console.log( data );
+      // send ajax
+      $.getJSON("/saveconfig",
+         data
+      ).done(function(data) {
+             console.log( data );
+             $(".spin-loader").addClass("state-ok");
+             $(".text-loader").text("Redémarez l'ESP !");
+             $(".button-loader").show();
+         }
+      ).fail(function(data) {
+            $(".spin-loader").addClass("state-false");
+            $(".text-loader").html("<span style='color:red;'>Erreur<br>"+data.responseJSON.error+"</span>");
+         }
+      );
+      return false;
+    }
+    
+    (function ($) {
+        $.fn.serializeFormJSON = function () {
+    
+            var o = {};
+            var a = this.serializeArray();
+            $.each(a, function () {
+                if (o[this.name]) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
+        };
+    })(jQuery);
+    </script>  
+  </body>
+</html>    
