@@ -145,11 +145,20 @@ Vous pouvez :
 
 ## Gestion
 
-Vous pouvez gérer votre volet roulant à l'aide : 
+Vous pouvez gérer votre volet roulant à l'aide :
+- de Gladys (en utilisant des scripts)
 - des commandes mécaniques
 - depuis votre smartphone.
 
 le tout en même temps
+
+#### Script Gladys
+commande à utiliser:
+> http://ip_de_lesp/?token=votre_token&deviceid=ID_du_volet&cmd=COMMAND&position=POSITION
+
+> COMMAND : open / stop / close / goto
+
+> POSITION : indiquer un pourcentage ( 0 = ouvert / 100 = fermé ) utilisé avec la commande 'goto'
 
 Allez sur la page 'système' puis sélectionnez le menu 'Gestion'
 
