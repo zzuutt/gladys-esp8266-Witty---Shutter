@@ -28,6 +28,8 @@ Afin de pouvoir télécharger des fichiers dans cette zone mémoire, il est néc
 ## Raccordement
 
 Schéma
+<p><a target="_blank" href="https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/Volet%20roulant%20-%20Schema.jpg"><img src="https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/Volet%20roulant%20-%20Schema.jpg" width="350"></a> &nbsp; &nbsp; <img src="https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/gestion3.gif" height="278"></p>
+
 
 ## Visualisation 
 Le module ESP est équipé d'une led 3 couleurs, nous allons l'utiliser pour visualiser chaque étape.
