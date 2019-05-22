@@ -14,9 +14,9 @@ Matériel nécessaire :
 
 Avec tout ça, nous allons contrôler un volet commandé par un inter (3 commandes - Monte / Stop / Descent) via :
 
-- Gladys (avec un script - pour le moment)
-- par l'interface web du module. 
-- inter 3 commandes
+- [x] Gladys (avec un script - pour le moment)
+- [x] par l'interface web du module. 
+- [x] inter 3 commandes
 
 # Description
 
@@ -131,7 +131,7 @@ Vous pouvez :
 
 > Après une coupure électrique, les commandes mécaniques ne sont pas prises en compte. Le volet est positionné à la valeur défini dans la configuration **[ position fermé / position ouvert / dernière position connue]**
 
-- blanc clignotant : le module envoie l'état du volet à Gladys.
+- ~~blanc clignotant : le module envoie l'état du volet à Gladys.~~
 
 ## Réglage des temps de courses (Monté et Descente)
 
@@ -154,9 +154,9 @@ Vous pouvez :
 ## Gestion
 
 Vous pouvez gérer votre volet roulant à l'aide :
-- de Gladys (en utilisant des scripts)
-- des commandes mécaniques
-- depuis votre smartphone.
+- [x] de Gladys (en utilisant des scripts)
+- [x] des commandes mécaniques
+- [x] depuis votre smartphone.
 
 le tout en même temps
 
