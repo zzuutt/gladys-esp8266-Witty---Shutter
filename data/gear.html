@@ -195,6 +195,7 @@
   var t;
   var voletId;
   var commandGoto = 0;
+  var voletIp;
   
   $( function() {
    $( "#slider-vertical" ).slider({
@@ -218,17 +219,17 @@
         $(".btn").removeClass("actif");
         commandGoto = 1;
         // send ajax
-        $.getJSON("http://192.168.2.36/",
+        $.getJSON("/",
            data
         ).done(function(data) {
-            ui.addClass("actif");
-            //console.log( data );
+               ui.addClass("actif");
+               //console.log( data );
                
            }
         ).fail(function(data) {
-              //$(".loader").show(); 
-              //$(".spin-loader").addClass("state-false");
-              //$(".text-loader").html("<span style='color:red;'>Erreur<br>"+data.responseJSON.error+"</span>");
+              $(".loader").show(); 
+              $(".spin-loader").addClass("state-false");
+              $(".text-loader").html("<span style='color:red;'>Erreur<br>"+data.responseJSON.error+"</span>");
            }
         );
         return false; 
@@ -248,17 +249,17 @@
       var data = "token=" + t + "&deviceid=" + voletId + "&cmd=" + cmd;
       $(".btn").removeClass("actif");
       // send ajax
-      $.getJSON("http://192.168.2.36/",
+      $.getJSON("/",
          data
       ).done(function(data) {
              co.addClass("actif");
              //console.log( data );
          }
       ).fail(function(data) {
-          co.addClass("actif");
-            //$(".loader").show(); 
-            //$(".spin-loader").addClass("state-false");
-            //$(".text-loader").html("<span style='color:red;'>Erreur<br>"+data.responseJSON.error+"</span>");
+          //co.addClass("actif");
+          $(".loader").show(); 
+          $(".spin-loader").addClass("state-false");
+          $(".text-loader").html("<span style='color:red;'>Erreur<br>"+data.responseJSON.error+"</span>");
          }
       );
       return false; 
@@ -267,7 +268,7 @@
   function init(){
     $(".text-loader").text("Initialisation");
     $(".loader").show();     
-    $.get( "http://192.168.2.36/sendconfig?mode=direct", function(result) {
+    $.get( "/sendconfig?mode=direct", function(result) {
       //console.log(result);
     }, "json" )
     .done(function(data){
@@ -275,6 +276,7 @@
       if(data.version) {$("#version").text('v ' + data.version);}
 
       if(data.t) {t = data.t;}
+      if(data.voletIp) { voletIp = data.voletIp; }
       if(data.voletId) { voletId = data.voletId; }
       getState();
       $(".loader").hide();
@@ -291,7 +293,7 @@
   }
   function getState() {
     if(commandGoto < 2) {
-      $.get( "http://192.168.2.36/sendstate", function(result) {
+      $.get( "/sendstate", function(result) {
         //console.log(result);
       }, "json" )
       .done(function(data){
