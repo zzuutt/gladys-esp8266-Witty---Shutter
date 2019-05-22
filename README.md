@@ -20,11 +20,11 @@ Avec tout ça, nous allons contrôler un volet commandé par un inter (3 command
 
 # Description
 
-Téléversez le fichier ino ou le bin dans l'ESP
-
 Nous allons utiliser une zone réservée appelée SPIFFS.
 
 Afin de pouvoir télécharger des fichiers dans cette zone mémoire, il est nécessaire d’installer l’outil de téléchargement des fichiers dans la zone SPIFFS à l’IDE Arduino disponible sur [Github](https://github.com/esp8266/arduino-esp8266fs-plugin).
+
+Téléversez le fichier ino dans l'ESP puis les datas  **_(dans ce sens !)_**
 
 ## Raccordement
 
