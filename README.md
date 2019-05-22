@@ -61,7 +61,7 @@ Le module ESP est équipé d'une led 3 couleurs, nous allons l'utiliser pour vis
 > **led rouge clignotante :**
 > indique une erreur
 
-Si vous n'utilisez pas le module optionnel (ACS712), dès que le module se trouvera dans l'obscurité, la led sera coupée.
+Si vous n'utilisez pas le module optionnel (ACS712), dès que l'esp se trouvera dans l'obscurité, la led sera coupée.
 Avec le module, vous pouvez configurer l'état de la led par défaut (voir page de config) et +
  
 ## Actions
