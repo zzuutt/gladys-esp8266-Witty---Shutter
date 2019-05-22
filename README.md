@@ -145,7 +145,9 @@ Vous pouvez :
 
 ### Réglage Automatique
 
-- vous avez raccordé le module optionnel. Faites le réglage en **automatique**
+- vous avez raccordé le module optionnel. Faites le réglage en **automatique** 
+
+_N'oubliez pas de cocher la case sur la page de configuration_
 
 > Sur la page 'système', sélectionnez le menu 'Courses (Auto)' et suivre les instructions
 
