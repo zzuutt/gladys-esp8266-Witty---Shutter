@@ -29,7 +29,7 @@ Téléversez le fichier ino dans l'ESP puis les datas  **_(dans ce sens !)_**
 ## Raccordement
 
 Schéma
-<p><a target="_blank" href="https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/Volet%20roulant%20-%20Schema.jpg"><img src="https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/Volet%20roulant%20-%20Schema.jpg" width="350"></a> &nbsp; &nbsp; <img src="https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/gestion3.gif" height="278"></p>
+<p><a target="_blank" href="https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/Volet%20roulant%20-%20Schema.jpg"><img src="https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/Volet%20roulant%20-%20Schema.jpg" width="350"></a> &nbsp; &nbsp; <img src="https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/gestion4.gif" height="278"></p>
 
 
 ## Visualisation 
@@ -175,7 +175,7 @@ commande à utiliser:
 Allez sur la page 'système' puis sélectionnez le menu 'Gestion'
 
 ![conf1](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/conf1.jpg)
-![gestion1](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/gestion3.gif)
+![gestion1](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/gestion4.gif)
 ![gestion](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/gestion.jpg)
 
 
