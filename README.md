@@ -16,6 +16,7 @@ Avec tout ça, nous allons contrôler un volet commandé par un inter (3 command
 
 - Gladys (avec un script - pour le moment)
 - par l'interface web du module. 
+- inter 3 commandes
 
 # Description
 
