@@ -1,6 +1,8 @@
 # gladys-esp8266-Witty  (lien vers [Gladys](https://gladysassistant.com/))
 ## Gestion des volets roulants
-Module ESP8266 Witty + card 8 relays + card current sensor (option)
+Module ESP8266 Witty + card 8 relays + card current sensor (option) + 2 cards isolation / detection
+
+_Si vous utilisez ce montage, pensez à m'envoyer un petit retour ;)_
 
 # Module ESP8266 Witty
 Nous allons utiliser un module ESP8266 Witty pour gérer 2 relais
@@ -11,7 +13,7 @@ Matériel nécessaire :
 - module ESP8266 [lien ebay](https://www.ebay.fr/itm/ESP8266-Serial-WIFI-Witty-Cloud-Development-Board-ESP-12F-Module-MINI-Nodemcu/264039039222?_trkparms=aid=111001&algo=REC.SEED&ao=1&asc=20160908105057&meid=7912a8f239d74abcb7126c140473364d&pid=100675&rk=6&rkt=15&sd=173503702813&itm=264039039222&_trksid=p2481888.c100675.m4236&_trkparms=pageci:8df836f6-4f16-11e9-aa46-74dbd1802d22%7Cparentrq:b59144011690ad794a1eef74fff9554d%7Ciid:1)
 - une carte 2 relais avec optocoupleur [lien ebay](https://www.ebay.fr/itm/1-2-4-6-8-Channel-5V-Relay-Module-Board-Optocoupler-LED-for-Arduino-PiC-ARM-AVR/263072650467?ssPageName=STRK%3AMEBIDX%3AIT&var=562073380398&_trksid=p2057872.m2749.l2649) 
 - une carte Current sensor (option) [lien ebay](https://www.ebay.fr/itm/Design-5A-Range-Current-Sensor-Module-ACS712-Module-Arduino-Module/173334859689?ssPageName=STRK%3AMEBIDX%3AIT&_trksid=p2060353.m1438.l2649)
-- 2 x une carte de detection / isolation (option) [lien ebay](https://www.ebay.fr/itm/1-Bit-AC-220V-Optocoupler-Isolation-Module-Voltage-Detect-Board-Adaptive-for-PLC/173472400743?ssPageName=STRK%3AMEBIDX%3AIT&_trksid=p2060353.m1438.l2649)
+- 2 x une carte de détection / isolation (option) [lien ebay](https://www.ebay.fr/itm/1-Bit-AC-220V-Optocoupler-Isolation-Module-Voltage-Detect-Board-Adaptive-for-PLC/173472400743?ssPageName=STRK%3AMEBIDX%3AIT&_trksid=p2060353.m1438.l2649)
 
 Pour ne pas tout recâbler, j'ai gardé la partie commande mécanique en 220VAC. J'utilise 2 cartes de detection/isolation pour le raccordement à l'esp.
 
