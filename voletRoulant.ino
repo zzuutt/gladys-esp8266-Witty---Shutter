@@ -9,6 +9,9 @@
    + Optocoupler Isolation Voltage Test Board 8 Channel AC 220V
 
    V 0.2.0
+   
+   Author: Zzuutt
+   https://github.com/zzuutt/gladys-esp8266-Witty---Shutter
 
 */
 #include <FS.h>
