@@ -8,7 +8,7 @@
    + Design 5A Range Current Sensor Module ACS712 Module Arduino Module
    + Optocoupler Isolation Voltage Test Board 8 Channel AC 220V
 
-   V 0.2.0
+   V 0.3.1
 
    Author: Zzuutt
    https://github.com/zzuutt/gladys-esp8266-Witty---Shutter
