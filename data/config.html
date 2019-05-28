@@ -155,6 +155,14 @@
             <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1">
               <div class="panel-body">
                 <fieldset class="legend-brdr-bttm">
+                <legend>mDNS</legend>
+                <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                  <label for="name_mdns">Nom</label>
+                  <input type="text" class="form-control" name="name_mdns" id="name_mdns" placeholder="esp8266" maxlength="32" value="">
+                  <p class="help-block">Indiquez le nom d'hôte avec lequel vous souhaitez que votre périphérique réponde<br />exemple: http://esp8266.local</p>
+                </div>
+                </fieldset>           
+                <fieldset class="legend-brdr-bttm">
                 <legend>Gladys</legend>
                 <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-3">
                   <label for="gladys_server">Adresse IP</label>
@@ -207,19 +215,36 @@
                 <!--- Peripherique 1 --->
                 <fieldset class="legend-brdr-bttm">
                 <legend>Volet</legend>
-                <div class="form-group col-xs-12 col-sm-4 col-md-4">
-                  <label for="deviceName1">Nom</label>
-                  <input type="text" class="form-control" name="voletName" id="voletName" placeholder="32 Caractères max." maxlength="32">
+                <div class="row">
+                  <div class="form-group col-xs-12 col-sm-4 col-md-4">
+                    <label for="deviceName1">Nom</label>
+                    <input type="text" class="form-control" name="voletName" id="voletName" placeholder="32 Caractères max." maxlength="32">
+                  </div>
+                  <div class="form-group col-xs-6 col-sm-2 col-md-2 col-lg-1">
+                    <label for="deviceId1">ID</label>
+                    <input type="text" class="form-control" name="voletId" id="voletId" placeholder="123" maxlength="3">
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4 col-md-4">
+                    <label for="voletGroup">Rattaché au groupe</label>
+                    <select class="form-control groupNameSelect" id="voletGroup" name="voletGroup">
+                      <option value="0">Aucun</option>
+                    </select>
+                  </div>
                 </div>
-                <div class="form-group col-xs-6 col-sm-2 col-md-2 col-lg-1">
-                  <label for="deviceId1">ID</label>
-                  <input type="text" class="form-control" name="voletId" id="voletId" placeholder="123" maxlength="3">
-                </div>
-                <div class="form-group col-xs-12 col-sm-4 col-md-4">
-                  <label for="voletGroup">Rattaché au groupe</label>
-                  <select class="form-control groupNameSelect" id="voletGroup" name="voletGroup">
-                    <option value="0">Aucun</option>
-                  </select>
+                <div class="row">
+                  <div class="form-group col-xs-12 col-sm-4 col-md-4">
+                    <p class="alert alert-info">Vous pouvez ajuster les temps de monté et descente, si les réglages vous semblent incorrects</p>
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4 col-md-4">
+                    <label for="CourseTime">Durée du temps de monté (ms)</label>
+                    <input type="number" class="form-control" name="upCourseTime" id="upCourseTime" placeholder="30000" min="1" max="999999">
+                    <p class="help-block">Durée en milli-secondes</p>
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4 col-md-4">
+                    <label for="CourseTime">Durée du temps de descente (ms)</label>
+                    <input type="number" class="form-control" name="downCourseTime" id="downCourseTime" placeholder="30000" min="1" max="999999">
+                    <p class="help-block">Durée en milli-secondes</p>
+                  </div>
                 </div>
                 <!--div class="form-group col-xs-6 col-sm-2 col-md-2">
                   <label for="deviceType1">Type</label>
@@ -275,6 +300,7 @@
         if(data.displayLight) {$("#displayLight").prop('checked', data.displayLight);}
         //sensorLight & sensorCurrent
         if(data.sensor) {$('input[name=sensor][value=' + data.sensor + ']').prop("checked", true);}
+        if(data.name_mdns) {$("#name_mdns").val(data.name_mdns);}
         if(data.gladys_server) {$("#gladys_server").val(data.gladys_server);}
         if(data.gladys_port) {$("#gladys_port").val(data.gladys_port);}
         if(data.gladys_token) {$("#gladys_token").val(data.gladys_token);}
@@ -313,6 +339,8 @@
         if(data.voletName) {$("#voletName").val(data.voletName);}
 
         if(data.voletGroup) {$("#voletGroup").val(data.voletGroup);}
+        if(data.upCourseTime) {$("#upCourseTime").val(data.upCourseTime);}
+        if(data.downCourseTime) {$("#downCourseTime").val(data.downCourseTime);}
 
         if(data.secretKey) {$("#secretKey").val(data.secretKey);}
 
