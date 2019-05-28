@@ -9,10 +9,10 @@
    + Optocoupler Isolation Voltage Test Board 8 Channel AC 220V
 
    V 0.2.0
-   
+
    Author: Zzuutt
    https://github.com/zzuutt/gladys-esp8266-Witty---Shutter
-
+   
 */
 #include <FS.h>
 #include <ESP8266WiFi.h>
@@ -20,6 +20,7 @@
 #include <ESP8266WebServer.h>
 #include <ESP8266HTTPClient.h>
 #include <DNSServer.h>
+#include <ESP8266mDNS.h>        // Include the mDNS library
 #include <WiFiManager.h>        //https://github.com/kentaylor/WiFiManager
 #include <Shutters.h>           //https://github.com/marvinroger/arduino-shutters
 #include <EEPROM.h>
@@ -28,7 +29,7 @@
 #include <Bounce2.h>            //https://github.com/thomasfredericks/Bounce2
 #include "ESP8266TrueRandom.h"
 
-String version_soft = "0.2.0";
+String version_soft = "0.3.1";
 
 class deviceVolet {
   public:
@@ -62,6 +63,7 @@ int nbrGroup = sizeof(groupName) / sizeof(groupName[0]); //array size  ;
 char gladys_server[40];
 char gladys_port[6] = "8080";
 char gladys_token[34] = "YOUR_GLADYS_TOKEN";
+char name_mdns[34] = "";
 //default custom static IP
 char static_ip[16] = "0.0.0.0";
 char static_gw[16] = "192.168.0.254";
@@ -392,7 +394,11 @@ bool readConfigFile() {
     json.printTo(Serial);
 
     // Parse all config file parameters, override
-    // local config variables with parsed values     
+    // local config variables with parsed values 
+    if (json.containsKey("name_mdns")) {
+      strcpy(name_mdns, json["name_mdns"]);
+    }
+        
     if (json.containsKey("gladys_server")) {
       strcpy(gladys_server, json["gladys_server"]);
     }
@@ -464,7 +470,7 @@ bool writeConfigFile() {
   JsonObject& json = jsonBuffer.createObject();
 
   // JSONify local configuration parameters
-   
+  json["name_mdns"] = name_mdns; 
   json["gladys_server"] = gladys_server;
   json["gladys_port"] = gladys_port;
   json["gladys_token"] = gladys_token;
@@ -635,7 +641,7 @@ void halt() {
   motorStatus = 0;
   digitalWrite(REL_UP_PIN, 1); 
   digitalWrite(REL_DOWN_PIN, 1);
-  if(gladys_server != "" && strcmp(gladys_server,"0.0.0.0") != 0) {
+  if(strlen(gladys_server) != 0 && strcmp(gladys_server,"0.0.0.0") != 0) {
     sendStateToGladys(shutters.getCurrentLevel()); 
   }
 }
@@ -876,7 +882,8 @@ void sendConfig(){
         json["sensor"] = "2";
       }
       json["displayLight"] = displayLight;
-        
+
+      json["name_mdns"] = name_mdns;
       json["gladys_server"] = gladys_server;
       json["gladys_port"] = gladys_port;
       json["gladys_token"] = gladys_token;
@@ -899,6 +906,8 @@ void sendConfig(){
     //json["voletType"] = volet.type;
 
     if(!stateCommand && debugMode) {
+      json["upCourseTime"] = upCourseTime;
+      json["downCourseTime"] = downCourseTime;
       json["voletGroup"] = volet.group;
       json["onRestartGoToPosition"] = onRestartGoToPosition; 
       json["secretKey"] = uuidStr;
@@ -951,7 +960,12 @@ void saveConfig(){
 //        } else {
 //          invertInputDataPortB = false;
 //        }
-    
+
+        if (server.hasArg("name_mdns")) {
+          temp = server.arg("name_mdns"); 
+          temp.toCharArray(name_mdns, temp.length()+1);
+        }
+           
         if (server.hasArg("sensor")) {
           sensorLight = true;
           sensorCurrent = false;
@@ -999,6 +1013,14 @@ void saveConfig(){
           onRestartGoToPosition = server.arg("onRestartGoToPosition").toInt();
         }
 
+        if (server.hasArg("upCourseTime")) {
+          upCourseTime = server.arg("upCourseTime").toInt();
+        }
+
+        if (server.hasArg("downCourseTime")) {
+          downCourseTime = server.arg("downCourseTime").toInt();
+        }
+        
         writeConfigFile();
         configOk = true;
         initialParam = false;
@@ -1257,7 +1279,7 @@ void setup() {
   } else {
     if (!initialConfig) {
       Serial.println("Init static IP :" + String(static_ip));
-      if(static_ip != "" && strcmp(static_ip,"0.0.0.0") != 0) {
+      if(strlen(static_ip) != 0 && strcmp(static_ip,"0.0.0.0") != 0) {
         //set static ip
         _ip.fromString(static_ip);
         _gw.fromString(static_gw);
@@ -1305,6 +1327,12 @@ void setup() {
     
     Serial.print("Local ip: ");
     Serial.println(WiFi.localIP());
+    if(strlen(name_mdns) != 0){
+      if (!MDNS.begin(name_mdns, WiFi.localIP())) {// Start the mDNS responder for esp8266.local
+        Serial.println("Error setting up MDNS responder!");
+      }
+      Serial.println("mDNS responder started");
+    }
     //all the sites which will be available
     server.on( "/", getHeatindex );
     server.on( "/sendconfig", sendConfig );
@@ -1324,6 +1352,7 @@ void setup() {
     server.serveStatic("/command", SPIFFS, "/gear.html");
     
     server.begin();
+    MDNS.addService("http", "tcp", 80);
     espStart = 1;
     interUp.update();
     interDown.update();
