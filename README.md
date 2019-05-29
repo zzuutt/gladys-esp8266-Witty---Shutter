@@ -47,10 +47,10 @@ Le module ESP est équipé d'une led 3 couleurs, nous allons l'utiliser pour vis
 > Le module est en configuration d'usine. Connectez vous sur l'interface de gestion pour entrer les paramètres.
 
 > **led magenta clignotante :**
-> Le volet descend
+> Le volet monte
 
 > **led jaune clignotante :**
-> Le volet monte
+> Le volet descend
 
 > **led verte clignotante :**
 > Indique la lecture du fichier de configuration
