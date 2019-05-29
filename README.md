@@ -129,11 +129,22 @@ http://ip-de-lesp/sys
 ![conf3](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/conf3.jpg)
 ![conf4](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/conf4.jpg)
 
-Vous pouvez :
-- régler la position du volet roulant après une coupure électrique
-- mettre un nom à votre volet roulant
-- définir la pièce ou il est situé
-- ....
+Menu Configuration :
+- Divers
+  - Définition du capteur (Sensor)
+  - Led active ?
+  - Position du volet après une coupure électrique
+- Serveur
+  - Nom d'hôte (mDNS)
+  - Gladys
+- Définition des Groupes
+  - nom des différents groupes
+- Définition du périphérique
+  - nom du volet
+  - ID
+  - Groupe
+  - Durée du temps de monté
+  - Durée du temps de descente
 
 > Après une coupure électrique, les commandes mécaniques ne sont pas prises en compte. Le volet est positionné à la valeur défini dans la configuration **[ position fermé / position ouvert / dernière position connue]**
 
