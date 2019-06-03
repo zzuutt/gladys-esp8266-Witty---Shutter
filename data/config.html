@@ -246,6 +246,16 @@
                     <p class="help-block">Durée en milli-secondes</p>
                   </div>
                 </div>
+                <div class="row">
+                  <div class="form-group col-xs-12 col-sm-4 col-md-4">
+                    <p class="alert alert-info">calibrationRatio: Ratio d'étalonnage. Par exemple. 0,5 signifie "50% du temps du course". Par exemple, si votre temps de parcours est de 10 000 et que le rapport de calibrage est de 0,2, lorsque vous définissez Level () sur 0 ou 100, les obturateurs se déplacent pendant 0,2 * 10 000 = 2 000 ms de plus que la normale. De cette façon, nous pouvons nous assurer que nous sommes réellement à 0 ou 100 et donc que nous sommes calibrés.</p>
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4 col-md-4">
+                    <label for="CourseTime">Ratio d'étalonnage</label>
+                    <input type="number" class="form-control" name="calibrationRatio" id="calibrationRatio" step="0.01" placeholder="0.2" min="0" max="1">
+                    <p class="help-block"></p>
+                  </div>
+                </div>
                 <!--div class="form-group col-xs-6 col-sm-2 col-md-2">
                   <label for="deviceType1">Type</label>
                   <select class="form-control" id="deviceType1" name="deviceType1">
@@ -341,6 +351,7 @@
         if(data.voletGroup) {$("#voletGroup").val(data.voletGroup);}
         if(data.upCourseTime) {$("#upCourseTime").val(data.upCourseTime);}
         if(data.downCourseTime) {$("#downCourseTime").val(data.downCourseTime);}
+        if(data.calibrationRatio) {$("#calibrationRatio").val(data.calibrationRatio);}
 
         if(data.secretKey) {$("#secretKey").val(data.secretKey);}
 
