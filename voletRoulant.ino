@@ -8,14 +8,13 @@
    + Design 5A Range Current Sensor Module ACS712 Module Arduino Module
    + Optocoupler Isolation Voltage Test Board 8 Channel AC 220V
 
-   V 0.3.1
-
    Author: Zzuutt
    https://github.com/zzuutt/gladys-esp8266-Witty---Shutter
    
 */
 #include <FS.h>
-#include <ESP8266WiFi.h>
+#include <ESP8266WiFi.h>        
+#include <ESP8266Ping.h>        //https://github.com/dancol90/ESP8266Ping
 #include <ArduinoJson.h>
 #include <ESP8266WebServer.h>
 #include <ESP8266HTTPClient.h>
@@ -29,7 +28,7 @@
 #include <Bounce2.h>            //https://github.com/thomasfredericks/Bounce2
 #include "ESP8266TrueRandom.h"
 
-String version_soft = "0.3.1";
+String version_soft = "0.3.5";
 
 class deviceVolet {
   public:
@@ -77,16 +76,18 @@ const char* CONFIG_FILE = "/config_param.json";
 const char* CONFIG_FILE_POSITION = "/last_position_level.json";
 
 const byte eepromOffset = 0;
-unsigned long upCourseTime = 30 * 1000;
-unsigned long downCourseTime = 30 * 1000;
-const float calibrationRatio = 0.1;
+unsigned long upCourseTime = 21 * 1000;
+unsigned long downCourseTime = 21 * 1000;
+float calibrationRatio = 0.1;
 unsigned long temporaryTime;
+unsigned long temp;
 
 int level = 0;
 int motorStatus = 0;  // 0 = arret; 1 = monte; 2 = descend;
 int lastInterStatus = 0;
 int lastPositionLevel = 100;
-int onRestartGoToPosition = 2; // 0 = Open; 1 = Close; 2 = LastPosition
+int levelStart = 0;
+int onRestartGoToPosition = 1; // 0 = Open; 1 = Close; 2 = LastPosition
 
 //PIN du boutton poussoir reset
 const int BUTTON_DEBUG_PIN = 4;
@@ -118,9 +119,13 @@ unsigned long intervalCheck = 250;
 unsigned long timeNow;
 int tempoMoteur = 0;
 
+unsigned long timePing;
+unsigned long intervalPing = 60000; //1mn
+
 bool courseTimeAuto = false;
 
 bool debugMode = false;
+bool error = false;
 bool espStart = false;
 // Indicates whether ESP has WiFi credentials saved from previous session
 bool initialConfig = false;
@@ -454,6 +459,10 @@ bool readConfigFile() {
       downCourseTime = json["downCourseTime"];
     }
 
+    if (json.containsKey("calibrationRatio")) {
+      calibrationRatio = json["calibrationRatio"];
+    }
+
     if (json.containsKey("onRestartGoToPosition")) {
       onRestartGoToPosition = json["onRestartGoToPosition"];
     }
@@ -494,6 +503,8 @@ bool writeConfigFile() {
   json["upCourseTime"] = upCourseTime;
 
   json["downCourseTime"] = downCourseTime;
+
+  json["calibrationRatio"] = calibrationRatio;
 
   json["onRestartGoToPosition"] = onRestartGoToPosition;
 
@@ -559,6 +570,9 @@ Shutters shutters;
 
 bool saveLastPostionLevel() {
   byte level = shutters.getCurrentLevel();
+  if(level == 255) {
+    level = 100;
+  }
   Serial.println("last level : " + String(level) + "%");
   Serial.println("Saving position");
 
@@ -906,8 +920,9 @@ void sendConfig(){
     //json["voletType"] = volet.type;
 
     if(!stateCommand && debugMode) {
-      json["upCourseTime"] = upCourseTime;
-      json["downCourseTime"] = downCourseTime;
+      json["upCourseTime"] = shutters.getUpCourseTime ();
+      json["downCourseTime"] = shutters.getDownCourseTime ();
+      json["calibrationRatio"] = shutters.getCalibrationRatio();
       json["voletGroup"] = volet.group;
       json["onRestartGoToPosition"] = onRestartGoToPosition; 
       json["secretKey"] = uuidStr;
@@ -1020,7 +1035,11 @@ void saveConfig(){
         if (server.hasArg("downCourseTime")) {
           downCourseTime = server.arg("downCourseTime").toInt();
         }
-        
+
+        if (server.hasArg("calibrationRatio")) {
+          calibrationRatio = server.arg("calibrationRatio").toFloat();
+        }
+
         writeConfigFile();
         configOk = true;
         initialParam = false;
@@ -1059,7 +1078,8 @@ void settingCourseTime(){
         Serial.println("Mesure temps de monté volet : Monte"); 
       }
       if(cmd == "stopUP"){
-        upCourseTime = millis()-temporaryTime;
+        temp = millis() - temporaryTime;
+        upCourseTime = temp - (temp * calibrationRatio);
         halt();
         Serial.println("Mesure temps de monté volet : Stop");  
         Serial.print("durée montée :");
@@ -1073,13 +1093,15 @@ void settingCourseTime(){
         Serial.println("Mesure temps de descente volet : Descend");  
       }
       if(cmd == "stopDOWN"){
-        downCourseTime = millis()-temporaryTime;
+        temp = millis() - temporaryTime;
+        downCourseTime = temp - (temp * calibrationRatio);
         halt();
         Serial.println("Mesure temps de descente volet : Stop");  
         Serial.print("durée descente :");
         Serial.println(downCourseTime);
         shutters.setCourseTime(upCourseTime, downCourseTime);
         writeConfigFile();
+        shutters.reset();
       }
       sendHeaderAccess();
       server.send(200, "text/json", "{\"ok\":\"ok\"}");
@@ -1138,7 +1160,8 @@ void settingAutoCourseTime(){
         while(valueCurrentMotorStandby < valueCurrentMotor){
           valueCurrentMotor = sensorStateCurrent();
         }
-        upCourseTime = millis()-temporaryTime;
+        temp = millis() - temporaryTime;
+        upCourseTime = temp - (temp * calibrationRatio);
         measureCourse.pourcent = 70;
         measureCourse.info = "Mesure du temps de monté terminé."; 
         halt();
@@ -1157,7 +1180,8 @@ void settingAutoCourseTime(){
         while(valueCurrentMotorStandby < valueCurrentMotor){
           valueCurrentMotor = sensorStateCurrent();
         }
-        downCourseTime = millis()-temporaryTime;
+        temp = millis() - temporaryTime;
+        downCourseTime = temp - (temp * calibrationRatio);
         measureCourse.pourcent = 90;
         measureCourse.info = "Mesure du temps de descente terminé.";
         halt();
@@ -1358,6 +1382,22 @@ void setup() {
     interDown.update();
     lastInterStatus = !(interUp.read())*10 + !(interDown.read());
 
+    if(onRestartGoToPosition == 0){
+      //shutters.setLevel(0); // Go to 0%
+      levelStart = 0;
+    }
+    if(onRestartGoToPosition == 1){
+      //shutters.setLevel(100); // Go to 100%
+      levelStart = 100;
+    }
+    if(onRestartGoToPosition == 2){
+      if(lastPositionLevel > 100) {
+        lastPositionLevel = 100;
+      }
+      //shutters.setLevel(lastPositionLevel); // Go to ?%
+      levelStart = lastPositionLevel;
+    }
+
     char storedShuttersState[shutters.getStateLength()];
     readInEeprom(storedShuttersState, shutters.getStateLength());
     shutters
@@ -1365,21 +1405,14 @@ void setup() {
       .setWriteStateHandler(shuttersWriteStateHandler)
       .restoreState(storedShuttersState)
       .setCourseTime(upCourseTime, downCourseTime)
+      .setCalibrationRatio(calibrationRatio)
       .onLevelReached(onShuttersLevelReached)
-      .begin();
+      .begin()
+      .setLevel(levelStart);
 
-    if(onRestartGoToPosition == 0){
-      shutters.setLevel(0); // Go to 0%
-    }
-    if(onRestartGoToPosition == 1){
-      shutters.setLevel(100); // Go to 100%
-    }
-    if(onRestartGoToPosition == 2){
-      if(lastPositionLevel > 100) {
-        lastPositionLevel = 100;
-      }
-      shutters.setLevel(lastPositionLevel); // Go to ?%
-    }
+
+
+    timePing = intervalPing + millis();
   }
 }
 
@@ -1396,7 +1429,7 @@ void loop() {
   button.tick();
 
   sensor = sensorStateLCR();
-  if(!debugMode){
+  if(!debugMode && !error){
     if(initialParam){
       if(sensor){
         if(motorStatus == 1){
@@ -1423,4 +1456,20 @@ void loop() {
       }
     }
   }
+  
+  timeNow = millis();
+  if(timeNow >= timePing) {
+    red();
+    timePing = intervalPing + millis();
+    //bool ret = Ping.ping(WiFi.localIP(),1);
+    if(Ping.ping(WiFi.gatewayIP(),1)) {
+      Serial.println("Ping Success!!");
+      error = false;
+      black();
+    } else {
+      Serial.println("Ping Error :(");
+      error = true;
+    }
+  }
+  
 }
