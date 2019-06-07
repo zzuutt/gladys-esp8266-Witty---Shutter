@@ -28,7 +28,7 @@
 #include <Bounce2.h>            //https://github.com/thomasfredericks/Bounce2
 #include "ESP8266TrueRandom.h"
 
-String version_soft = "0.3.5";
+String version_soft = "0.3.6";
 
 class deviceVolet {
   public:
@@ -61,7 +61,7 @@ int nbrGroup = sizeof(groupName) / sizeof(groupName[0]); //array size  ;
 // WiFi Router Login - change these to your router settings
 char gladys_server[40];
 char gladys_port[6] = "8080";
-char gladys_token[34] = "YOUR_GLADYS_TOKEN";
+char gladys_token[50] = "YOUR_GLADYS_TOKEN";
 char name_mdns[34] = "";
 //default custom static IP
 char static_ip[16] = "0.0.0.0";
