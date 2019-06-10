@@ -183,7 +183,15 @@ le tout en même temps
 * installez le module (si ce n'est pas déjà fait) de **Mathieu**, [Gladys-Device-HTTP](https://github.com/MathieuAndrade/Gladys-Device-HTTP)
 * Ajoutez un nouveau device, comme indiqué, dans le champ identifier renseignez l'adresse complète de votre device (http://ip_de_lesp)
 ![Gladys1](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/Screenshot_2019-06-10%20P%C3%A9riph%C3%A9riques%20Gladys.png)
-* Une fois créé voir cliquez sur “voir plus”. Dans le champ identifier du deviceType entrez les paramètres suivants Identifier: /?token=**VOTRE-TOKEN**&deviceid=**ID-FIGURANT-SUR-CETTE-MEME-LIGNE**&cmd=goto
+
+* Une fois créé voir cliquez sur “voir plus”. Dans le champ identifier du deviceType entrez les paramètres suivants 
+- Identifier: /?token=**VOTRE-TOKEN**&deviceid=**ID-FIGURANT-SUR-CETTE-MEME-LIGNE**&cmd=goto
+- Type : pourcent
+- Catégorie: Capteur d'ouverture fenêtre
+- Unité: %
+- min: 0
+- max: 100
+
 ![Gladys1](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/Screenshot_2019-06-10%20P%C3%A9riph%C3%A9riques%20Gladys(1).png)
 
 Cela donne cela:
