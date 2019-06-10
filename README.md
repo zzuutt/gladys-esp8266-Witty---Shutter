@@ -173,7 +173,7 @@ _N'oubliez pas de cocher la case sur la page de configuration_
 ## Gestion
 
 Vous pouvez gérer votre volet roulant à l'aide :
-- [x] de Gladys (en utilisant des scripts)
+- [x] de Gladys (Directement par l'interface et en utilisant des scripts)
 - [x] des commandes mécaniques
 - [x] depuis votre smartphone.
 
