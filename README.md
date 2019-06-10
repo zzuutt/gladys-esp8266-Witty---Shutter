@@ -148,7 +148,7 @@ Menu Configuration :
 
 > Après une coupure électrique, les commandes mécaniques ne sont pas prises en compte. Le volet est positionné à la valeur défini dans la configuration **[ position fermé / position ouvert / dernière position connue]**
 
-- ~~blanc clignotant : le module envoie l'état du volet à Gladys.~~
+- blanc clignotant : le module envoie l'état du volet à Gladys.
 
 ## Réglage des temps de courses (Monté et Descente)
 
@@ -178,6 +178,18 @@ Vous pouvez gérer votre volet roulant à l'aide :
 - [x] depuis votre smartphone.
 
 le tout en même temps
+
+#### Gestion via Gladys
+* installez le module (si ce n'est pas déjà fait) de **Mathieu**, [Gladys-Device-HTTP](https://github.com/MathieuAndrade/Gladys-Device-HTTP)
+* Ajoutez un nouveau device, comme indiqué, dans le champ identifier renseignez l'adresse complète de votre device (http://ip_de_lesp)
+![Gladys1](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/Screenshot_2019-06-10%20P%C3%A9riph%C3%A9riques%20Gladys.png)
+* Une fois créé voir cliquez sur “voir plus”. Dans le champ identifier du deviceType entrez les paramètres suivants Identifier: /?token=**VOTRE-TOKEN**&deviceid=**ID-FIGURANT-SUR-CETTE-MEME-LIGNE**&cmd=goto
+![Gladys1](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/Screenshot_2019-06-10%20P%C3%A9riph%C3%A9riques%20Gladys(1).png)
+
+Cela donne cela:
+
+[![videoGladys1](https://i9.ytimg.com/vi/iVRMdMqa7eU/3.jpg?sqp=CJCD-ecF&rs=AOn4CLAg1ymA5Mvjr6I3fcz2GulRuxPqkw)](https://youtu.be/iVRMdMqa7eU)
+
 
 #### Script Gladys
 commande à utiliser:
