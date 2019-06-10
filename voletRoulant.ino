@@ -28,7 +28,7 @@
 #include <Bounce2.h>            //https://github.com/thomasfredericks/Bounce2
 #include "ESP8266TrueRandom.h"
 
-String version_soft = "0.3.6";
+String version_soft = "0.4.0";
 
 class deviceVolet {
   public:
@@ -823,7 +823,17 @@ void getHeatindex() {
             if(debugMode){
               Serial.print("  Goto: " + String(vposition) + "%");
             }            
-          }          
+          }
+          if (server.hasArg("state")) { //just do the checks if the parameter is available
+            vposition = server.arg("state").toInt();
+            if(vposition >= 0 && vposition <= 100){
+              shutters.setLevel(vposition); 
+              commandState = true; 
+            }
+            if(debugMode){
+              Serial.print("  Goto: " + String(vposition) + "%");
+            }            
+          }         
         }
         if(debugMode){
           Serial.println("");
@@ -1226,7 +1236,7 @@ void sendState() {
   server.send(200, "text/json", config_json);
 }
 
-void sendStateToGladys (bool realState){
+void sendStateToGladys (int realState){
   HTTPClient http;
   String getData, link, payload;
   
@@ -1237,6 +1247,9 @@ void sendStateToGladys (bool realState){
   }
   
   getData = "?token=" + String(gladys_token) + "&devicetype=" + String(volet.id) + "&value=" + String(realState);
+  if(strlen(gladys_port) == 0) {
+    strcpy(gladys_port, "80");
+  }
   link = "http://" + String(gladys_server) + ":" + String(gladys_port) + "/devicestate/create" + getData;
   http.begin(link);
   int httpCode = http.GET();
