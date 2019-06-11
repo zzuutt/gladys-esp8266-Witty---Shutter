@@ -34,7 +34,7 @@ Téléversez le fichier ino dans l'ESP puis les datas  **_(dans ce sens !)_**
 ## Raccordement
 
 Schéma
-<p><a target="_blank" href="https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/Volet%20roulant%20-%20Schema.jpg"><img src="https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/Volet%20roulant%20-%20Schema.jpg" width="350"></a> &nbsp; &nbsp; <img src="https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/gestion5.gif" height="278"></p>
+<p><a target="_blank" href="https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/Volet%20roulant%20-%20Schema.jpg"><img src="https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/Volet%20roulant%20-%20Schema.jpg" width="350"></a> &nbsp; &nbsp; <img src="https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/gestion5.gif" height="278"><img src="https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/Gladys.jpg" height="278"></p>
 
 **_Si vous respectez le raccordement du 220VAC sur les relais, vous ne risquez pas d'endommager le moteur. Même si vous appuyez sur la monté et la descente simultanément !_**
 
@@ -180,6 +180,8 @@ Vous pouvez gérer votre volet roulant à l'aide :
 le tout en même temps
 
 #### Gestion via Gladys
+![gladys](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/Gladys.jpg)
+
 * installez le module (si ce n'est pas déjà fait) de **Mathieu**, [Gladys-Device-HTTP](https://github.com/MathieuAndrade/Gladys-Device-HTTP)
 * Ajoutez un nouveau device, comme indiqué, dans le champ identifier renseignez l'adresse complète de votre device (http://ip_de_lesp)
 ![Gladys1](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/Screenshot_2019-06-10%20P%C3%A9riph%C3%A9riques%20Gladys.png)
