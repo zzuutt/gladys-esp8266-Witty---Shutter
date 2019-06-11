@@ -145,6 +145,7 @@ Menu Configuration :
   - Groupe
   - Durée du temps de monté
   - Durée du temps de descente
+  - Calibration Ratio
 
 > Après une coupure électrique, les commandes mécaniques ne sont pas prises en compte. Le volet est positionné à la valeur défini dans la configuration **[ position fermé / position ouvert / dernière position connue]**
 
