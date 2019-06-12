@@ -196,7 +196,7 @@ le tout en même temps
 
 Cela donne cela:
 
-[![videoGladys1](https://i9.ytimg.com/vi/iVRMdMqa7eU/3.jpg?sqp=CJCD-ecF&rs=AOn4CLAg1ymA5Mvjr6I3fcz2GulRuxPqkw)](https://youtu.be/iVRMdMqa7eU)
+[![Video Glagys](https://img.youtube.com/vi/iVRMdMqa7eU/0.jpg)](https://www.youtube.com/watch?v=iVRMdMqa7eU)
 
 
 #### Script Gladys
