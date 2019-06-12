@@ -119,10 +119,7 @@ La led verte clignote puis passe au blanc clignotant ou bleu clignotant rapide.
 
 http://ip-de-lesp/sys
 
->**IL N'EST PAS NECESSAIRE DE RENSEIGNER LES PARAMETRES 'SERVEUR' 'GLADYS'**
-
->Gladys pourra quand même envoyer les commandes via un script
-
+>**Pour une gestion via Gladys, renseignez les parametres 'SERVEUR' 'GLADYS'**
 
 ![conf1](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/conf1.jpg)
 ![conf2](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/conf2.jpg)
@@ -141,7 +138,7 @@ Menu Configuration :
   - nom des différents groupes
 - Définition du périphérique
   - nom du volet
-  - ID
+  - ID (-*id du device-type dans Gladys*- voir § Gestion via Gladys)
   - Groupe
   - Durée du temps de monté
   - Durée du temps de descente
