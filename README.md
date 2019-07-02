@@ -14,6 +14,7 @@ Matériel nécessaire :
 - une carte 2 relais avec optocoupleur [lien ebay](https://www.ebay.fr/itm/1-2-4-6-8-Channel-5V-Relay-Module-Board-Optocoupler-LED-for-Arduino-PiC-ARM-AVR/263072650467?ssPageName=STRK%3AMEBIDX%3AIT&var=562073380398&_trksid=p2057872.m2749.l2649) 
 - une carte Current sensor (option) [lien ebay](https://www.ebay.fr/itm/Design-5A-Range-Current-Sensor-Module-ACS712-Module-Arduino-Module/173334859689?ssPageName=STRK%3AMEBIDX%3AIT&_trksid=p2060353.m1438.l2649)
 - 2 x une carte de détection / isolation (option) [lien ebay](https://www.ebay.fr/itm/1-Bit-AC-220V-Optocoupler-Isolation-Module-Voltage-Detect-Board-Adaptive-for-PLC/173472400743?ssPageName=STRK%3AMEBIDX%3AIT&_trksid=p2060353.m1438.l2649)
+- Alim 220VAC - 5VDC [lien ebay](https://www.ebay.fr/itm/HLK-PM01-HLK-PM03-HLK-PM12-220V-to-5V-3-3V-12V-Step-Down-Power-Supply-Module/263200022486?ssPageName=STRK%3AMEBIDX%3AIT&var=562194362141&_trksid=p2057872.m2749.l2648)
 
 Pour ne pas tout recâbler, j'ai gardé la partie commande mécanique en 220VAC. J'utilise 2 cartes de detection/isolation pour le raccordement à l'esp.
 
