@@ -35,7 +35,7 @@ Téléversez le fichier ino dans l'ESP puis les datas  **_(dans ce sens !)_**
 ## Raccordement
 
 Schéma
-<p><a target="_blank" href="https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/Volet%20roulant%20--%20Schema.jpg"><img src="https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/Volet%20roulant%20-%20Schema.jpg" width="350"></a> &nbsp; &nbsp; <img src="https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/gestion5.gif" height="278"><img src="https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/Gladys.jpg" height="278"></p>
+<p><a target="_blank" href="https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/Volet%20roulant%20--%20Schema.jpg"><img src="https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/Volet%20roulant%20--%20Schema.jpg" width="350"></a> &nbsp; &nbsp; <img src="https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/gestion5.gif" height="278"><img src="https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/Gladys.jpg" height="278"></p>
 
 **_Si vous respectez le raccordement du 220VAC sur les relais, vous ne risquez pas d'endommager le moteur. Même si vous appuyez sur la monté et la descente simultanément !_**
 
