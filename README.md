@@ -20,7 +20,7 @@ Pour ne pas tout recâbler, j'ai gardé la partie commande mécanique en 220VAC.
 
 Avec tout ça, nous allons contrôler un volet commandé par un inter (3 commandes - Monte / Stop / Descent) via :
 
-- [x] Gladys (avec un script - pour le moment)
+- [x] Gladys (v3)
 - [x] par l'interface web du module. 
 - [x] inter 3 commandes
 
