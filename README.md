@@ -178,7 +178,7 @@ Vous pouvez gérer votre volet roulant à l'aide :
 
 le tout en même temps
 
-#### Gestion via Gladys
+#### Gestion via Gladys (v3)
 ![gladys](https://github.com/zzuutt/gladys-esp8266-Witty---Shutter/blob/master/images/Gladys.jpg)
 
 * installez le module (si ce n'est pas déjà fait) de **Mathieu**, [Gladys-Device-HTTP](https://github.com/MathieuAndrade/Gladys-Device-HTTP)
