@@ -1271,7 +1271,7 @@ void sendStateToGladys (int realState){
   }
 }
 
-void setup() {
+void setup(void) {
   pinMode(BLUE_PIN_LED, OUTPUT);
   pinMode(RED_PIN_LED, OUTPUT);
   pinMode(GREEN_PIN_LED, OUTPUT);
@@ -1429,12 +1429,13 @@ void setup() {
   }
 }
 
-void loop() {
+void loop(void) {
   // is configuration portal requested?
   if (initialConfig) {
     clearConfig();
   }
   
+  MDNS.update();
   //process all the requests for the Webserver
   server.handleClient();  
   shutters.loop();
