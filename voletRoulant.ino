@@ -28,7 +28,7 @@
 #include <Bounce2.h>            //https://github.com/thomasfredericks/Bounce2
 #include "ESP8266TrueRandom.h"
 
-String version_soft = "0.4.0";
+String version_soft = "0.4.1";
 
 class deviceVolet {
   public:
